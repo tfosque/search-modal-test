@@ -41,6 +41,7 @@ export class AccordionComponent implements OnInit {
     });
   }
 
+  // NEW:
   submitForm(f: NgForm) {
     console.log("inputName:", this.form.inputName);
     console.log("inputNotifications:", this.form.inputNotifications);
@@ -50,12 +51,22 @@ export class AccordionComponent implements OnInit {
     console.log("valid::", this.form.inputName.invalid);
   }
 
+  // NEW:
   disableEditing() {
     // if inputName is empty (onCancel)
-    this.form.inputName === ""
-      ? (this.form.inputName = this.savedSearch.name)
-      : null;
+    this.resetOnDisable();
     this.editing = false;
+  }
+
+  // NEW:
+  resetOnDisable() {
+    console.log(this.form.inputDescription);
+    if (this.form.inputName === "") {
+      this.form.inputName = this.savedSearch.name;
+    }
+    if (this.form.inputDescription === "") {
+      this.form.inputDescription = this.savedSearch.description;
+    }
   }
 
   expand() {
