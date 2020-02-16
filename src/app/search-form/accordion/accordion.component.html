@@ -1,9 +1,9 @@
 <section>
   <form (ngSubmit)="submitForm(f)" #f="ngForm">
     <div class="card">
+
       <!-- Accordion Items -->
-      <ul class="card-header" (click)="!editing ? (isCollapsed= !isCollapsed) :
-        null">
+      <ul class="card-header" (click)="!editing ? (isCollapsed= !isCollapsed) : null">
         <li>
           <button type="button" class="btn fa fa-chevron-right"
             [ngStyle]="{ transform: isCollapsed ? '' : 'rotate(90deg)' }"></button>
@@ -18,7 +18,7 @@
           <!-- Edit savedSearch input -->
           <ng-template #editName>
             <input [(ngModel)]="form.inputName" #inputName="ngModel" name="inputName" required autocomplete="off"
-              size="35" [ngClass]="f.form.invalid ? 'edit-name-invalid' :
+              size="42" [ngClass]="f.form.invalid ? 'edit-name-invalid' :
               'edit-name'" [ngStyle]="{ background: inputName === '' ? 'red' : '' }"
               [value]="f.form.invalid ? 'Name is required' : form.inputName" />
           </ng-template>
@@ -27,16 +27,29 @@
           <span>{{ savedSearch.result_count | number }}</span>
         </li>
         <li (click)="loadOverlays()">
-          <button type="button" class="btn btn-outline-primary btn-xs">
+          <button type="button" class="btn">
             LOAD
           </button>
         </li>
       </ul>
 
+
       <!-- Accordion Hidden Content Starts Here -->
       <div [collapse]="isCollapsed" [isAnimated]="true">
-        <div class="card-body">
+
+        <!-- Overlay Colors -->
+        <div class="row overlays">
+          <span *ngFor="let color of overlayColors">
+            <a [ngStyle]="{ 'background': color.color, 'width': '32px', 'height': '5px', 'display': 'inline-block',
+            'margin-right': '.063em' }">&nbsp;&nbsp;</a>
+
+          </span>
+        </div>
+
+        <!-- Content -->
+        <div [ngClass]="{ 'card-body' : !editing, 'card-body-edit-mode': editing  }">
           <div class="description-container">
+
             <!-- Notifications -->
             <nav class="user-nav">
               <input #inputNotifications="ngModel" [id]="this.savedSearch.name" [(ngModel)]="form.inputNotifications"
@@ -49,7 +62,7 @@
             </nav>
 
             <!-- Description View -->
-            <h4 class="desc_subtitle">Description:</h4>
+            <h5 class="desc_subtitle">Description:</h5>
             <div class="description">
               <ng-template #Description>
                 <div class="description" innerHTML="{{ form.inputDescription
@@ -59,20 +72,18 @@
               <!-- Description Editing -->
               <div *ngIf="editing; else Description">
                 <textarea #textArea="ngModel" [(ngModel)]="form.inputDescription" name="inputDescription" [rows]="savedSearch.description &&
-                  savedSearch.description.length <200
-                  ? 2
-                  : savedSearch.description.length> 200 &&
-                  savedSearch.description.length <499
-                    ? 7
+                  savedSearch.description.length < 200
+                  ? 5
+                  : savedSearch.description.length > 200 &&
+                  savedSearch.description.length < 499
+                    ? 6
                     : savedSearch.description.length> 500
                     ? 9
                     : 5
-                    " cols="78" class="textarea-edit"
+                    " cols="96" class="textarea-edit"
                   style="overflow-y: 'scroll'">{{ form.inputDescription }]</textarea>
               </div>
             </div>
-
-            <div class="divider"></div>
 
             <!-- EditMode Buttons -->
             <footer class="edit-mode-footer">
@@ -95,17 +106,7 @@
               </button>
             </footer>
 
-            <br />
-            <div class="alert alert-info" [hidden]="f.form.valid">
-              <h4>
-                Form Values:
-              </h4>
-              <div>
-                <p>{{ form.inputName }}</p>
-                <p>{{ form.inputNotifications }}</p>
-                <p>{{ form.inputDescription }}</p>
-              </div>
-            </div>
+
           </div>
         </div>
       </div>

@@ -83,9 +83,10 @@
 
 
         <div class="accordion-container">
-          <app-accordion #accordion *ngFor="let item of savedSearches" [id]="item.id" [searchText]="searchText"
-            (closeModal)="closeModal()" (refresh)="refresh()" (delete)="deleteItem($event)" [collapseAll]="collapseAll"
-            [expandAll]="expandAll" [savedSearch]="item"></app-accordion>
+          <app-accordion #accordion *ngFor="let item of savedSearches | sortByFilter: 'datetime_updated'" [id]="item.id"
+            [searchText]="searchText" (closeModal)="closeModal()" (refresh)="refresh()" (delete)="deleteItem($event)"
+            [collapseAll]="collapseAll" [expandAll]="expandAll" [savedSearch]="item">
+          </app-accordion>
         </div>
       </div>
 

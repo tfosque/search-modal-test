@@ -27,6 +27,8 @@ export class AccordionComponent implements OnInit {
   isCollapsed = true;
   editing: boolean;
 
+  public overlayColors: any = {};
+
   constructor() {}
 
   ngOnInit() {
@@ -39,16 +41,18 @@ export class AccordionComponent implements OnInit {
     this.expandAll.subscribe((collapsed: boolean) => {
       this.isCollapsed = collapsed;
     });
+
+    this.overlayIcons();
   }
 
   // NEW:
   submitForm(f: NgForm) {
-    console.log("inputName:", this.form.inputName);
+    /* console.log("inputName:", this.form.inputName);
     console.log("inputNotifications:", this.form.inputNotifications);
     console.log("inputDescription:", this.form.inputDescription);
     console.log(this.form);
     console.log({ f });
-    console.log("valid::", this.form.inputName.invalid);
+    console.log("valid::", this.form.inputName.invalid); */
   }
 
   // NEW:
@@ -60,13 +64,46 @@ export class AccordionComponent implements OnInit {
 
   // NEW:
   resetOnDisable() {
-    console.log(this.form.inputDescription);
     if (this.form.inputName === "") {
       this.form.inputName = this.savedSearch.name;
     }
     if (this.form.inputDescription === "") {
       this.form.inputDescription = this.savedSearch.description;
     }
+  }
+
+  // NEW:
+  overlayIcons() {
+    // grab overlays from api_queries.card-img-overlay
+    // [foundri, midb, media]
+    function getColors(input: string) {
+      let color: string;
+
+      if (input === "foundri") {
+        color = "#F55151";
+      }
+      if (input === "midb") {
+        color = "#28C643";
+      }
+      if (input === "media") {
+        color = "#776BA3";
+      }
+
+      return color;
+    }
+
+    const overlays =
+      this.savedSearch && this.savedSearch.api_queries
+        ? this.savedSearch.api_queries.map(m => {
+            return { color: getColors(m.overlay) };
+          })
+        : null;
+    this.overlayColors = overlays;
+    console.log({ overlays });
+  }
+
+  loadOverlays(event) {
+    // event.defaultPrevented();
   }
 
   expand() {

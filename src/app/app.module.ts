@@ -12,9 +12,10 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { SearchFormComponent } from "./search-form/search-form.component";
 import { AccordionComponent } from "./search-form/accordion/accordion.component";
+import { SortByFilterPipe } from './pipes/sort-by-filter.pipe';
 
 @NgModule({
-  declarations: [AppComponent, SearchFormComponent, AccordionComponent],
+  declarations: [AppComponent, SearchFormComponent, AccordionComponent, SortByFilterPipe],
   imports: [
     BrowserModule,
     FormsModule,
