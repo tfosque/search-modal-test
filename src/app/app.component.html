@@ -1,4 +1,6 @@
 <div class="container-fluid">
   <app-search-form #searchForm [searchText]="searchText" [savedSearchCount]="savedSearchCount"
-    [savedSearches]="savedSearches" (expandAll)="expandAll()" (collapseAll)="collapseAll()"></app-search-form>
+    [savedSearches]="savedSearches" (expandAll)="expandAll()" (collapseAll)="collapseAll()"
+    (updateCheckbox)="updateCheckbox($event)" (refreshAll)="refreshEventC($event)">
+  </app-search-form>
 </div>

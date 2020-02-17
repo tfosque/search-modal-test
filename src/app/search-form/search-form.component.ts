@@ -1,6 +1,4 @@
 import { Component, OnInit, EventEmitter, Input, Output } from "@angular/core";
-import { HttpErrorResponse } from "@angular/common/http";
-
 @Component({
   selector: "app-search-form",
   templateUrl: "./search-form.component.html",
@@ -12,11 +10,14 @@ export class SearchFormComponent implements OnInit {
   @Input() searchText: string = null;
 
   public name: string;
+  public isCollapsed = new EventEmitter();
   isExpand: boolean;
 
-  public isCollapsed = new EventEmitter();
   @Output() expandAll = new EventEmitter();
   @Output() collapseAll = new EventEmitter();
+
+  @Output("refreshAll") refreshEvent = new EventEmitter();
+  @Output("updateCheckbox") submitFromCheckbox = new EventEmitter();
 
   constructor() /*
     public modalRef: BsModalRef,
@@ -34,8 +35,9 @@ export class SearchFormComponent implements OnInit {
     // this.modalRef.hide();
   }
 
-  ngAfterViewInit() {
-    // this.getSearches();
+  saveChanges() {
+    console.log("saveChanges");
+    // this.submitCheckboxEvent.emit();
   }
 
   /* getSearches() {
@@ -77,6 +79,16 @@ export class SearchFormComponent implements OnInit {
   expand() {
     this.expandAll.emit(false);
     this.isExpand = true;
+  }
+
+  submitFromCheckboxComponent(event) {
+    // console.log("search-form:.....");
+    this.submitFromCheckbox.emit(event);
+  }
+
+  refreshFromComponent(event) {
+    console.log({ event });
+    this.refreshEvent.emit();
   }
 
   refresh() {

@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
 import { NgForm } from "@angular/forms";
+import { CrudStorageService } from "../../services/crud-storage.service";
+import * as _ from "lodash";
 
 @Component({
   selector: "app-accordion",
@@ -16,7 +18,9 @@ export class AccordionComponent implements OnInit {
   @Input() filtering: boolean;
   @Input() searchText: string;
 
-  @Output() delete = new EventEmitter();
+  @Output() refreshEvent = new EventEmitter();
+  @Output() submitCheckboxEvent = new EventEmitter();
+
   @Output() refresh = new EventEmitter();
   @Output() closeModal = new EventEmitter();
 
@@ -29,8 +33,9 @@ export class AccordionComponent implements OnInit {
 
   public overlayColors: any = {};
 
-  constructor() {}
+  constructor(private api: CrudStorageService) {}
 
+  // NEW:
   ngOnInit() {
     this.editing = false;
 
@@ -46,13 +51,36 @@ export class AccordionComponent implements OnInit {
   }
 
   // NEW:
+  delete() {
+    // console.log("form:", this.form);
+    this.api.deleteLocalData(this.savedSearch.id);
+
+    setTimeout(() => {
+      // const newEntry = { id: this.savedSearch.id, ...this.form };
+      this.refreshEvent.emit();
+    }, 150);
+  }
+
+  // NEW:
+  updateForm() {
+    // this.update.emit(this.form);
+  }
+
+  // NEW:
   submitForm(f: NgForm) {
-    /* console.log("inputName:", this.form.inputName);
-    console.log("inputNotifications:", this.form.inputNotifications);
-    console.log("inputDescription:", this.form.inputDescription);
-    console.log(this.form);
     console.log({ f });
-    console.log("valid::", this.form.inputName.invalid); */
+    console.log("valid::", this.form.inputName.invalid);
+  }
+
+  // NEW:
+  saveChanges() {
+    const query = {
+      name: this.form.inputName,
+      enable_notifications: this.form.inputNotifications,
+      description: this.form.inputDescription
+    };
+
+    this.submitCheckboxEvent.emit({ ...this.savedSearch, ...query });
   }
 
   // NEW:
@@ -99,7 +127,7 @@ export class AccordionComponent implements OnInit {
           })
         : null;
     this.overlayColors = overlays;
-    console.log({ overlays });
+    // console.log({ overlays });
   }
 
   loadOverlays(event) {

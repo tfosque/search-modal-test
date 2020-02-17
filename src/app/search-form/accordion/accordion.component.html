@@ -1,5 +1,5 @@
 <section>
-  <form (ngSubmit)="submitForm(f)" #f="ngForm">
+  <form (ngSubmit)="saveChanges(f)" #f="ngForm">
     <div class="card">
 
       <!-- Accordion Items -->
@@ -27,12 +27,11 @@
           <span>{{ savedSearch.result_count | number }}</span>
         </li>
         <li (click)="loadOverlays()">
-          <button type="button" class="btn">
+          <button id="button" type="button" class="btn">
             LOAD
           </button>
         </li>
       </ul>
-
 
       <!-- Accordion Hidden Content Starts Here -->
       <div [collapse]="isCollapsed" [isAnimated]="true">
@@ -42,7 +41,6 @@
           <span *ngFor="let color of overlayColors">
             <a [ngStyle]="{ 'background': color.color, 'width': '32px', 'height': '5px', 'display': 'inline-block',
             'margin-right': '.063em' }">&nbsp;&nbsp;</a>
-
           </span>
         </div>
 
@@ -54,7 +52,7 @@
             <nav class="user-nav">
               <input #inputNotifications="ngModel" [id]="this.savedSearch.name" [(ngModel)]="form.inputNotifications"
                 name="inputNotifications" autocomplete="off" type="checkbox" [checked]="inputNotifications"
-                (change)="submitForm('checkbox')" />
+                (change)="saveChanges()" />
               <label [for]="this.savedSearch.name" style="margin-left: 0.5rem;
                 color: #000">
                 Receive notifications
@@ -100,13 +98,11 @@
               <button *ngIf="editing" (click)="this.disableEditing()" class="btn btn-primary btn-xs" type="button">
                 <i class="fa fa-close"></i> CANCEL
               </button>
-              <button (click)="deleteItem()" class="btn btn-danger btn-xs
+              <button (click)="delete()" class="btn btn-danger btn-xs
                   pull-right float-right" type="button">
                 <i class="fa fa-trash"></i> DELETE
               </button>
             </footer>
-
-
           </div>
         </div>
       </div>
