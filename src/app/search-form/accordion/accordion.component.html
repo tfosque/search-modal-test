@@ -91,7 +91,7 @@
                 style="margin-left: 0.5rem;
                 color: #000"
               >
-                Receive notifications
+                <small>Receive notifications</small>
               </label>
             </nav>
 
@@ -171,6 +171,25 @@
               </button>
             </footer>
           </div>
+
+          <!-- Details Sumamry -->
+          <div [ngStyle]="{ margin: 'auto', 'text-align': 'center' }">
+            <button
+              type="button"
+              class="btn btn-secondary btn-sm"
+              [ngStyle]="{
+                'border-radius': '4px 4px 0px 0px',
+                'font-size': '0.75rem'
+              }"
+              (click)="isDetailsCollapsed = !isDetailsCollapsed"
+            >
+              Details Summary
+            </button>
+          </div>
+          <app-details-summary
+            [collapse]="isDetailsCollapsed"
+            [isAnimated]="true"
+          ></app-details-summary>
         </div>
       </div>
     </div>

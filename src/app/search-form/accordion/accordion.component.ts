@@ -30,7 +30,9 @@ export class AccordionComponent implements OnInit {
   inputNotifications: boolean;
 
   isCollapsed = true;
+  isDetailsCollapsed = true;
   editing: boolean;
+  showDetails = false;
 
   public overlayColors: any = {};
 
@@ -128,6 +130,10 @@ export class AccordionComponent implements OnInit {
   loadOverlays(event) {
     // TODO: leaflet or mapBox
     // event.defaultPrevented();
+  }
+
+  showDetailsSummary() {
+    this.showDetails = !this.showDetails;
   }
 
   toggleEditing() {

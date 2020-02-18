@@ -12,6 +12,8 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { SearchFormComponent } from "./search-form/search-form.component";
 import { AccordionComponent } from "./search-form/accordion/accordion.component";
+import { DetailsSummaryComponent } from "./search-form/details-summary/details-summary.component";
+
 import { SortByFilterPipe } from "./pipes/sort-by-filter.pipe";
 import { FilterByPipe } from "./pipes/filter-by.pipe";
 
@@ -20,6 +22,7 @@ import { FilterByPipe } from "./pipes/filter-by.pipe";
     AppComponent,
     SearchFormComponent,
     AccordionComponent,
+    DetailsSummaryComponent,
     SortByFilterPipe,
     FilterByPipe
   ],
@@ -35,4 +38,4 @@ import { FilterByPipe } from "./pipes/filter-by.pipe";
   providers: [DataService],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
