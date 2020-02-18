@@ -7,7 +7,7 @@ export class FilterByPipe implements PipeTransform {
   transform(items: any[], searchText: string): any[] {
     if (!items) return [];
     if (!searchText) return items;
-    console.log({ items }, { searchText });
+    // console.log({ items }, { searchText });
 
     return items.filter(item => {
       return Object.keys(item).some(key => {

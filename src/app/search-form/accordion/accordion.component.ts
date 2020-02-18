@@ -20,6 +20,7 @@ export class AccordionComponent implements OnInit {
 
   @Output() refreshEvent = new EventEmitter();
   @Output() submitCheckboxEvent = new EventEmitter();
+  @Output() localRefresh = new EventEmitter();
 
   @Output() refresh = new EventEmitter();
   @Output() closeModal = new EventEmitter();
@@ -33,7 +34,7 @@ export class AccordionComponent implements OnInit {
 
   public overlayColors: any = {};
 
-  constructor(private api: CrudStorageService) {}
+  constructor(private api: CrudStorageService) { }
 
   // NEW:
   ngOnInit() {
@@ -48,6 +49,10 @@ export class AccordionComponent implements OnInit {
     });
 
     this.overlayIcons();
+
+    const raw = this.savedSearch.datetime_updated;
+    const newDate = new Date(raw).toLocaleDateString();
+    const newDateISO = new Date(raw).toISOString();
   }
 
   // NEW:
@@ -62,29 +67,18 @@ export class AccordionComponent implements OnInit {
   }
 
   // NEW:
-  updateForm() {
-    // this.update.emit(this.form);
-  }
-
-  // NEW:
-  submitForm(f: NgForm) {
-    console.log({ f });
-    console.log("valid::", this.form.inputName.invalid);
-  }
-
-  // NEW:
   saveChanges() {
+    this.disableEditing();
     const query = {
       name: this.form.inputName,
       enable_notifications: this.form.inputNotifications,
       description: this.form.inputDescription
     };
-
     this.submitCheckboxEvent.emit({ ...this.savedSearch, ...query });
   }
 
-  // NEW:
   disableEditing() {
+    // NEW:
     // if inputName is empty (onCancel)
     this.resetOnDisable();
     this.editing = false;
@@ -123,26 +117,23 @@ export class AccordionComponent implements OnInit {
     const overlays =
       this.savedSearch && this.savedSearch.api_queries
         ? this.savedSearch.api_queries.map(m => {
-            return { color: getColors(m.overlay) };
-          })
+          return { color: getColors(m.overlay) };
+        })
         : null;
     this.overlayColors = overlays;
     // console.log({ overlays });
   }
 
   loadOverlays(event) {
+    // TODO: leaflet or mapBox
     // event.defaultPrevented();
-  }
-
-  expand() {
-    // this.expandAll.emit(true);
-  }
-
-  collapse() {
-    // this.collapseAll.emit(true);
   }
 
   toggleEditing() {
     this.editing = !this.editing;
+  }
+
+  localRefreshEvent() {
+    this.localRefresh.emit();
   }
 }

@@ -17,18 +17,26 @@ export class CrudStorageService {
 
   // api call
   getApiData(): Observable<any[]> {
-    // let data: any[];
     return this.http.get<any[]>(this.api);
   }
 
   // Local Storage
   getLocalStorage() {
     // return this.http.get<any[]>(this.api);
-    return JSON.parse(localStorage.getItem("savedSearches"));
+    // convert any invalid dates to ISO date format
+    // let db = this.data.getSearches().slice(0, 33);
+    /* db = db.map(m => {
+      return {
+        ...m,
+        datetime_updated: this.toISO(m.datetime_updated, m.id)
+      };
+    }); */
+
+    let db = JSON.parse(localStorage.getItem("savedSearches"));
+    return db;
   }
 
   udpdateLocalStorage(newData: any) {
-    // console.log({ newData });
     localStorage.setItem("savedSearches", JSON.stringify(newData));
     this.getLocalStorage();
   }
@@ -38,8 +46,6 @@ export class CrudStorageService {
     let newData = [];
     let db = JSON.parse(this.localdb);
 
-    // console.log({ newData });
-
     db.map(item => {
       if (item.id !== id) {
         // console.log({ item });
@@ -48,5 +54,14 @@ export class CrudStorageService {
     });
 
     this.udpdateLocalStorage(newData);
+  }
+
+  // generic
+  toISO(item, id: number) {
+    console.log({ item }, id);
+    const raw = item;
+    const newDate = new Date(raw).toLocaleDateString();
+    const newDateIso = new Date(newDate).toISOString();
+    return newDateIso;
   }
 }

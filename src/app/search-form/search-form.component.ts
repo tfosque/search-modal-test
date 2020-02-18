@@ -17,6 +17,7 @@ export class SearchFormComponent implements OnInit {
   @Output() collapseAll = new EventEmitter();
 
   @Output("refreshAll") refreshEvent = new EventEmitter();
+  @Output() localRefresh = new EventEmitter();
   @Output("updateCheckbox") submitFromCheckbox = new EventEmitter();
 
   constructor() /*
@@ -24,7 +25,7 @@ export class SearchFormComponent implements OnInit {
     public modalService: BsModalService, */
   // private messageService: MessageService,
   // private waterbearService: FoundriService
-  {}
+  { }
 
   ngOnInit() {
     // this.savedSearchCount = 0;
@@ -84,6 +85,10 @@ export class SearchFormComponent implements OnInit {
   submitFromCheckboxComponent(event) {
     // console.log("search-form:.....");
     this.submitFromCheckbox.emit(event);
+  }
+
+  localRefreshEvent() {
+    this.localRefresh.emit();
   }
 
   refreshFromComponent(event) {

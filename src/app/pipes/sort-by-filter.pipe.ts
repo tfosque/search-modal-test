@@ -12,13 +12,13 @@ export class SortByFilterPipe implements PipeTransform {
     if (!items) return [];
     if (!text) return items;
 
-    /*  items.sort((a: any, b: any) => {
+    items.sort((a: any, b: any) => {
       // console.log({a}, {b})
-      return a['name'] > b['name'] ? 1 : -1;
-    }); */
+      return a["datetime_updated"] > b["datetime_updated"] ? 1 : -1;
+    });
 
-    // _.sortBy(items, ["name"]);
-
-    return _.sortBy(items, ["datetime_updated"]);
+    // console.log("sort", _.sortBy(items, "datetime_updated"));
+    return _.sortBy(items, _.sortBy(items, "datetime_updated"));
+    // return items;
   }
 }

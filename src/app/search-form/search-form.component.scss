@@ -21,8 +21,19 @@ input.form-control.searchText {
   display: block;
 }
 
+.modal-footer {
+  background: #292929;
+  color: #fff;
+}
+
 .modal-header {
   // border-bottom: none;
+  color: #fff;
+  background: #292929;
+
+  button > span {
+    color: #fff;
+  }
 
   h2 {
     font-size: 1rem;
@@ -119,3 +130,5 @@ input-group-text {
     font-size: 1rem;
   }
 }
+
+// .modal-header>button>span

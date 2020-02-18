@@ -12,27 +12,25 @@ export class AppComponent implements OnInit {
   savedSearchCount: number;
   searchText: string;
 
-  constructor(private api: CrudStorageService) {}
+  constructor(private api: CrudStorageService) { }
 
   ngOnInit() {
     this.getLocalData();
   }
 
-  /* ngOnChanges(changes: SimpleChanges): void {
-    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
-    //Add '${implements OnChanges}' to the class.
-    console.log({ changes });
-  } */
-
   // TEMP:
   getLocalData() {
-    const db = JSON.parse(localStorage.getItem("savedSearches"));
-    // console.log(db);
+    // const db = JSON.parse(localStorage.getItem("savedSearches"));
+    const localdb = JSON.parse(localStorage.getItem("savedSearches"));
 
-    // console.log({ db });
-    _.isEmpty(db)
-      ? this.api.getApiData().subscribe(res => console.log({ res }))
-      : ((this.savedSearches = db), (this.savedSearchCount = db.length));
+    _.isEmpty(localdb)
+      ? this.api.getApiData().subscribe(res => {
+        console.log({ res });
+        this.api.udpdateLocalStorage(res);
+        this.getLocalData();
+      })
+      : ((this.savedSearches = localdb),
+        (this.savedSearchCount = localdb.length));
   }
 
   clearSearchText() {
@@ -52,12 +50,28 @@ export class AppComponent implements OnInit {
         this.isExpand = true; */
   }
 
+  toISO(date) {
+    // console.log({ date });
+
+    // const raw = date.datetime_updated;
+    // console.log({ date });
+
+    const newDate = new Date(date).toLocaleDateString();
+    // console.log({ newDate });
+
+    const newDateISO = new Date(date).toISOString();
+    // console.log({ newDateISO });
+
+    return newDateISO;
+  }
+
   // NEW:
   updateCheckbox(event) {
     // item id,  // map over and replace
-    // let newData = [];
     let newData = this.savedSearches;
     const id = event.id;
+    const timeStamp = this.toISO(Date.now());
+    // console.log({ timeStamp });
 
     newData.map(item => {
       if (item.id === id) {
@@ -66,13 +80,13 @@ export class AppComponent implements OnInit {
         return (
           (item.name = event.name),
           (item.enable_notifications = event.enable_notifications),
-          (item.description = event.description)
+          (item.description = event.description),
+          (item.datetime_updated = timeStamp)
         );
       }
 
       this.api.udpdateLocalStorage(newData);
-      this.savedSearches = newData;
-      // console.log({ newData });
+      this.getLocalData();
       return;
     });
   }
@@ -84,5 +98,10 @@ export class AppComponent implements OnInit {
       this.savedSearches = newData;
       this.savedSearchCount = newData.length;
     }, 150);
+  }
+
+  // NEW:
+  localRefresh() {
+    this.getLocalData();
   }
 }
