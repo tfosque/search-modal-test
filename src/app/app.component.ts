@@ -67,16 +67,18 @@ export class AppComponent implements OnInit {
 
   // NEW:
   updateCheckbox(event) {
+    console.log({ event })
     // item id,  // map over and replace
     let newData = this.savedSearches;
     const id = event.id;
     const timeStamp = this.toISO(Date.now());
-    // console.log({ timeStamp });
+
+    console.log({ timeStamp });
 
     newData.map(item => {
       if (item.id === id) {
-        // console.log({ item });
-        // console.log({ event });
+        console.log({ item });
+        console.log({ event });
         return (
           (item.name = event.name),
           (item.enable_notifications = event.enable_notifications),
@@ -84,24 +86,22 @@ export class AppComponent implements OnInit {
           (item.datetime_updated = timeStamp)
         );
       }
-
-      this.api.udpdateLocalStorage(newData);
-      this.getLocalData();
-      return;
     });
+    this.api.udpdateLocalStorage(newData);
+    setTimeout(() => {
+      this.getLocalData();
+    }, 250);
   }
 
   // NEW:
   refreshEventC() {
-    setTimeout(() => {
-      const newData = this.api.getLocalStorage();
-      this.savedSearches = newData;
-      this.savedSearchCount = newData.length;
-    }, 150);
+    const newData = this.api.getLocalStorage();
+    this.savedSearches = newData;
+    this.savedSearchCount = newData.length;
   }
 
   // NEW:
   localRefresh() {
-    this.getLocalData();
+    // this.getLocalData();
   }
 }

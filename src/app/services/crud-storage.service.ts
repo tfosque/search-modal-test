@@ -13,7 +13,7 @@ export class CrudStorageService {
   private api =
     "https://my.api.mockaroo.com/SavedSearches_mars.json?key=c1a35bd0";
 
-  constructor(public mockaroo: DataService, private http: HttpClient) {}
+  constructor(public mockaroo: DataService, private http: HttpClient) { }
 
   // api call
   getApiData(): Observable<any[]> {
@@ -38,7 +38,6 @@ export class CrudStorageService {
 
   udpdateLocalStorage(newData: any) {
     localStorage.setItem("savedSearches", JSON.stringify(newData));
-    this.getLocalStorage();
   }
 
   deleteLocalData(id: number) {

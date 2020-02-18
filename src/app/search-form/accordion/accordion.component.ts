@@ -74,6 +74,7 @@ export class AccordionComponent implements OnInit {
       enable_notifications: this.form.inputNotifications,
       description: this.form.inputDescription
     };
+    // TODO: change name submitEvent
     this.submitCheckboxEvent.emit({ ...this.savedSearch, ...query });
   }
 
