@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.getLocalData();
+    localStorage.setItem('localCollapseStatus', JSON.stringify([]))
   }
 
   // TEMP:
@@ -50,13 +51,8 @@ export class AppComponent implements OnInit {
         this.isExpand = true; */
   }
 
-  toISO(date) {
-    // console.log({ date });
-
-    // const raw = date.datetime_updated;
-    // console.log({ date });
-
-    const newDate = new Date(date).toLocaleDateString();
+  toISO(date: any) {
+    // const newDate = new Date(date).toLocaleDateString();
     // console.log({ newDate });
 
     const newDateISO = new Date(date).toISOString();
@@ -67,7 +63,7 @@ export class AppComponent implements OnInit {
 
   // NEW:
   updateCheckbox(event) {
-    console.log({ event })
+    // console.log({ event })
     // item id,  // map over and replace
     let newData = this.savedSearches;
     const id = event.id;
@@ -77,8 +73,8 @@ export class AppComponent implements OnInit {
 
     newData.map(item => {
       if (item.id === id) {
-        console.log({ item });
-        console.log({ event });
+        /* console.log({ item });
+        console.log({ event }); */
         return (
           (item.name = event.name),
           (item.enable_notifications = event.enable_notifications),

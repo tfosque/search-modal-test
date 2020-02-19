@@ -15,7 +15,11 @@ import { AccordionComponent } from "./search-form/accordion/accordion.component"
 import { DetailsSummaryComponent } from "./search-form/details-summary/details-summary.component";
 
 import { SortByFilterPipe } from "./pipes/sort-by-filter.pipe";
+import { SavedSearchFilterPipe } from './pipes/saved-search-filter.pipe';
 import { FilterByPipe } from "./pipes/filter-by.pipe";
+import { HighlightPipe } from './pipes/highlight.pipe';
+
+import { AlertService } from './services/alert/alert.service';
 
 @NgModule({
   declarations: [
@@ -24,18 +28,20 @@ import { FilterByPipe } from "./pipes/filter-by.pipe";
     AccordionComponent,
     DetailsSummaryComponent,
     SortByFilterPipe,
-    FilterByPipe
+    SavedSearchFilterPipe,
+    FilterByPipe,
+    HighlightPipe
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule,
     AppRoutingModule,
     TooltipModule.forRoot(),
     CollapseModule.forRoot()
   ],
-  providers: [DataService],
+  providers: [DataService, AlertService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

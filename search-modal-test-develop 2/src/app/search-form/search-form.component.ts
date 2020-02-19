@@ -13,19 +13,14 @@ export class SearchFormComponent implements OnInit {
   public isCollapsed = new EventEmitter();
   isExpand: boolean;
 
-  @Output() expandAll = new EventEmitter();
-  @Output() collapseAll = new EventEmitter();
+  public expandAll = new EventEmitter();
+  public collapseAll = new EventEmitter();
 
   @Output("refreshAll") refreshEvent = new EventEmitter();
   @Output() localRefresh = new EventEmitter();
   @Output("updateCheckbox") submitFromCheckbox = new EventEmitter();
 
-  constructor() /*
-    public modalRef: BsModalRef,
-    public modalService: BsModalService, */
-  // private messageService: MessageService,
-  // private waterbearService: FoundriService
-  { }
+  constructor(){ }
 
   ngOnInit() {
     // this.savedSearchCount = 0;
@@ -41,31 +36,9 @@ export class SearchFormComponent implements OnInit {
     // this.submitCheckboxEvent.emit();
   }
 
-  /* getSearches() {
-        this.waterbearService.getSavedSearches().subscribe(
-            savedSearches => {
-                console.log({savedSearches});
-
-                this.saveSearches = savedSearches;
-                this.savedSearchCount = this.saveSearches && this.saveSearches.length ? this.saveSearches.length : null;
-            },
-            (error: HttpErrorResponse) => {
-                // this.messageService.bad(`Error retrieving saved searches: ${error.status}`);
-            }
-        );
-    } */
 
   deleteItem(id: number) {
-    /* this.waterbearService.deleteSavedSearch(id).subscribe(
-            savedSearches => {
-                this.savedSearchCount = savedSearches && savedSearches.length ? savedSearches.length : null;
-            },
-            (error: HttpErrorResponse) => {
-                // this.messageService.bad(`Error retrieving saved searches: ${error.status}`);
-            }
-        ); */
-    // this.refresh();
-    // this.messageService.good(`Your Saved Search was successfully deleted.`);
+
   }
 
   clearSearchText() {
@@ -96,10 +69,8 @@ export class SearchFormComponent implements OnInit {
     this.refreshEvent.emit();
   }
 
+  // duplicate clearSearchText()
   refresh() {
     this.searchText = null;
-    /* setTimeout(() => {
-            this.getSearches();
-        }, 500); */
   }
 }

@@ -101,7 +101,7 @@
               <ng-template #Description>
                 <div
                   class="description"
-                  innerHTML="{{ form.inputDescription }}"
+                  innerHTML="{{ form.inputDescription | highlight: searchText }}"
                 ></div>
               </ng-template>
 
@@ -124,10 +124,7 @@
                   "
                   cols="96"
                   class="textarea-edit"
-                  style="overflow-y: 'scroll'"
-                >
-{{ form.inputDescription }]</textarea
-                >
+                  style="overflow-y: 'scroll'">{{ form.inputDescription }]</textarea>
               </div>
             </div>
 

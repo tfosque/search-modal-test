@@ -131,7 +131,7 @@
             #accordion
             *ngFor="
               let item of savedSearches
-                | filterby: searchText
+                | savedSearchFilter: searchText
                 | sortByFilter: 'datetime_updated'
             "
             [id]="item.id"

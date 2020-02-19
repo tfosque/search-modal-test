@@ -1,0 +1,59 @@
+Confluence Demo
+
+// GENERIC:
+Compact UI
+Dark mode
+Durability show 3000-1000 entries
+Filters show <kbd>highlights</kbd>
+Collapseable
+
+// EDITING:
+White-space
+After saving changes or deleting item capture items that are not collapsed and reopen those after update is completed.
+
+
+
+NICE TO HAVE:
+// UXUI:
+Show some type of action/animation when user saves search and updated search moves to top of list
+
+// RECOMMENDATIONS:
+Show color bars for overlays in description area (needs wireframe)
+Details Summary Map/Photos (nees wireframe)
+Do we truncate inputName
+Do we limit desription
+Do we limit 1000 displayed ? UI really doesn't need to show  1000
+Bulk delete for large list
+
+
+
+
+TODO: Dont collapse on disableEditing()
+TODO: After editing scroll top:
+TODO: Create a Model for an PhotoApi in mockaroo
+TODO: 279 Warnings id same
+TODO: after saving clear collapsStatus
+TODO: fix name is required
+
+
+//NPM RESOURCES:
+npm install free-google-image-search --save
+
+{
+  "query": "{\"search\":\"geometry:({\\\"type\\\":\\\"FeatureCollection\\\",\\\"features\\\":[{\\\"type\\\":\\\"Feature\\\",\\\"properties\\\":{},\\\"geometry\\\":{\\\"type\\\":\\\"Polygon\\\",\\\"coordinates\\\":[[[-180,83.2692806651588],[180,83.2692806651588],[180,-69.65214753299553],[-180,-69.65214753299553],[-180,83.2692806651588]]]}}]})\",\"length\":10000,\"fields\":{\"includes\":[\"geometry\",\"EN_NAME\",\"NAME\",\"DETECTED_LANG\",\"CAT_CODE\",\"CLUSTER_SVC_COUNT\",\"CONFLATE_DATE\",\"ANALYST_USER_VALIDATIONS_COUNT\",\"ANALYST_SME_VALIDATIONS_COUNT\",\"TOTAL_FOUNDRI_CONFIDENCE\"]},\"sorting\":[\"-CONFLATE_DATE\",\"SORT_ID\"]}",
+}
+
+path:
+maps/-0.10507,-18.91224,2.5z
+
+// Angular Animation
+     <button class="btn btn-info" (click)="changeState('state2')">
+                  Change State 2
+                </button>
+
+                <section class="row" [currentState]="toState">
+
+                </section>
+
+
+aDIlBSw4dCjHIsRaAzzj013iFdG5jbipzmcLMU_WAzY
