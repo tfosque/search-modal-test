@@ -98,6 +98,7 @@ export class AppComponent implements OnInit {
     const newData = this.api.getLocalStorage();
     this.savedSearches = newData;
     this.savedSearchCount = newData.length;
+
   }
 
   // NEW:

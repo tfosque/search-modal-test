@@ -73,7 +73,7 @@
         <div
           [ngClass]="{ 'card-body': !editing, 'card-body-edit-mode': editing }"
         >
-          <div class="description-container">
+          <div class="description-container" *ngIf="isDetailsCollapsed">
             <!-- Notifications -->
             <nav class="user-nav">
               <input
@@ -101,7 +101,9 @@
               <ng-template #Description>
                 <div
                   class="description"
-                  innerHTML="{{ form.inputDescription }}"
+                  innerHTML="{{
+                    form.inputDescription | highlight: searchText
+                  }}"
                 ></div>
               </ng-template>
 
@@ -186,11 +188,13 @@
               Details Summary
             </button>
           </div>
-          <app-details-summary
-            [collapse]="isDetailsCollapsed"
-            [isAnimated]="true"
-          ></app-details-summary>
         </div>
+        <app-details-summary
+          [collapse]="isDetailsCollapsed"
+          [isAnimated]="true"
+          [isDetailsCollapsed]="isDetailsCollapsed"
+          [savedSearch]="savedSearch"
+        ></app-details-summary>
       </div>
     </div>
   </form>

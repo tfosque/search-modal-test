@@ -50,16 +50,20 @@ export class AccordionComponent implements OnInit {
       this.isCollapsed = collapsed;
     });
 
+    this.collapseAll.subscribe((collapsed: boolean) => {
+      this.isCollapsed = collapsed;
+    });
+
     this.overlayIcons();
 
-    const raw = this.savedSearch.datetime_updated;
-    const newDate = new Date(raw).toLocaleDateString();
-    const newDateISO = new Date(raw).toISOString();
+    /*  const raw = this.savedSearch.datetime_updated;
+     const newDate = new Date(raw).toLocaleDateString();
+     const newDateISO = new Date(raw).toISOString(); */
   }
 
   // NEW:
   delete() {
-    // console.log("form:", this.form);
+    console.log("form:", this.form);
     this.api.deleteLocalData(this.savedSearch.id);
 
     setTimeout(() => {
@@ -142,5 +146,6 @@ export class AccordionComponent implements OnInit {
 
   localRefreshEvent() {
     this.localRefresh.emit();
+
   }
 }

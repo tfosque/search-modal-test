@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div>
   <app-search-form
     #searchForm
     [searchText]="searchText"
@@ -9,6 +9,7 @@
     (localRefresh)="localRefresh()"
     (updateCheckbox)="updateCheckbox($event)"
     (refreshAll)="refreshEventC($event)"
+    style="position: relative; top: 0; left: 0; z-index: 1200;"
   >
   </app-search-form>
 </div>

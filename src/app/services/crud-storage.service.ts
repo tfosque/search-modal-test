@@ -63,4 +63,10 @@ export class CrudStorageService {
     const newDateIso = new Date(newDate).toISOString();
     return newDateIso;
   }
+
+  getLatestFromStorage() {
+    return JSON.parse(localStorage.getItem("savedSearches"));
+  }
 }
+
+

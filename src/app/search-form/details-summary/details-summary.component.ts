@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-details-summary',
@@ -7,12 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailsSummaryComponent implements OnInit {
 
+  @Input() isDetailsCollapsed: boolean;
+  @Input() savedSearch: any;
+
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   toggleDetails() {
   }
+
 
 }

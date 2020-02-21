@@ -98,8 +98,8 @@ export class SearchFormComponent implements OnInit {
 
   refresh() {
     this.searchText = null;
-    /* setTimeout(() => {
-            this.getSearches();
-        }, 500); */
+    setTimeout(() => {
+      // this.getSearches();
+    }, 500);
   }
 }
