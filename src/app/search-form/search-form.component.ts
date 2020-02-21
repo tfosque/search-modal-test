@@ -1,6 +1,4 @@
 import { Component, OnInit, EventEmitter, Input, Output } from "@angular/core";
-import { HttpErrorResponse } from "@angular/common/http";
-
 @Component({
   selector: "app-search-form",
   templateUrl: "./search-form.component.html",
@@ -12,18 +10,22 @@ export class SearchFormComponent implements OnInit {
   @Input() searchText: string = null;
 
   public name: string;
+  public isCollapsed = new EventEmitter();
   isExpand: boolean;
 
-  public isCollapsed = new EventEmitter();
   @Output() expandAll = new EventEmitter();
   @Output() collapseAll = new EventEmitter();
+
+  @Output("refreshAll") refreshEvent = new EventEmitter();
+  @Output() localRefresh = new EventEmitter();
+  @Output("updateCheckbox") submitFromCheckbox = new EventEmitter();
 
   constructor() /*
     public modalRef: BsModalRef,
     public modalService: BsModalService, */
   // private messageService: MessageService,
   // private waterbearService: FoundriService
-  {}
+  { }
 
   ngOnInit() {
     // this.savedSearchCount = 0;
@@ -34,8 +36,9 @@ export class SearchFormComponent implements OnInit {
     // this.modalRef.hide();
   }
 
-  ngAfterViewInit() {
-    // this.getSearches();
+  saveChanges() {
+    console.log("saveChanges");
+    // this.submitCheckboxEvent.emit();
   }
 
   /* getSearches() {
@@ -79,10 +82,24 @@ export class SearchFormComponent implements OnInit {
     this.isExpand = true;
   }
 
+  submitFromCheckboxComponent(event) {
+    // console.log("search-form:.....");
+    this.submitFromCheckbox.emit(event);
+  }
+
+  localRefreshEvent() {
+    this.localRefresh.emit();
+  }
+
+  refreshFromComponent(event) {
+    console.log({ event });
+    this.refreshEvent.emit();
+  }
+
   refresh() {
     this.searchText = null;
-    /* setTimeout(() => {
-            this.getSearches();
-        }, 500); */
+    setTimeout(() => {
+      // this.getSearches();
+    }, 500);
   }
 }
